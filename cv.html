@@ -187,8 +187,8 @@
       <h1 class="bar-title">Yuhui Zhang — Curriculum Vitae</h1>
     </div>
     <nav class="bar-actions" aria-label="CV actions">
-      <a href="documents/CV.pdf?v=20260907" class="btn" target="_blank" rel="noopener">Open PDF</a>
-      <a href="documents/CV.pdf?v=20260907" class="btn btn-solid" download="Yuhui_Zhang_CV.pdf">Download</a>
+      <a href="documents/CV.pdf" class="btn" id="open-pdf" target="_blank" rel="noopener">Open PDF</a>
+      <a href="documents/CV.pdf" class="btn btn-solid" id="download-pdf" download="Yuhui_Zhang_CV.pdf">Download</a>
     </nav>
   </header>
 
@@ -203,9 +203,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
     (function () {
-      const FILE = 'documents/CV.pdf?v=20260907';
+      // Cache-bust at load time, not with a hard-coded version. Replacing the
+      // PDF on GitHub then has to be the only step — a stale query string would
+      // otherwise keep serving the previous file from the browser cache.
+      const FILE = 'documents/CV.pdf?t=' + Date.now();
       const pagesEl = document.getElementById('pages');
       const statusEl = document.getElementById('status');
+
+      ['open-pdf', 'download-pdf'].forEach(function (id) {
+        const a = document.getElementById(id);
+        if (a) a.href = FILE;
+      });
 
       let settled = false;
 
