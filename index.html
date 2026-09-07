@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yuhui Zhang — Behavioral Cybersecurity &amp; Agentic AI</title>
+  <meta name="description" content="Yuhui Zhang — Ph.D. candidate in Management Science and Systems at the University at Buffalo, working on behavioral cybersecurity, human–AI interaction, and AI-enabled analytics.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:        #F7F8FA;
+      --surface:   #FFFFFF;
+      --ink:       #0B1220;
+      --text:      #2F3846;
+      --muted:     #414A59;
+      --faint:     #5A6472;
+      --line:      #E6E9EE;
+      --line-soft: #EEF1F4;
+      --accent:    #1D4ED8;
+      --accent-2:  #1739A8;
+      --warm:      #EA580C;
+      --wash:      #EAF0FE;
+
+      --amber-bg:  #FBEBC8;  --amber-tx: #7A4B08;
+      --oral-bg:   #E6E8FD;  --oral-tx:  #2F32A0;
+      --hot-bg:    #FBE0DC;  --hot-tx:   #A5271C;
+      --prog-bg:   #E8F3EC;  --prog-tx:  #1C6B3C;
+
+      --maxw: 1060px;
+      --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --display: 'Space Grotesk', 'Inter', sans-serif;
+      --body: 'Inter', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--body);
+      color: var(--text);
+      background:
+        radial-gradient(1100px 520px at 80% -8%, #EEF3FF 0%, rgba(238,243,255,0) 60%),
+        var(--bg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color .18s ease; }
+    a:hover { color: var(--warm); }
+
+    img { max-width: 100%; display: block; }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ---------- shared utility type ---------- */
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .inline-link {
+      color: var(--accent);
+      box-shadow: inset 0 -1px 0 rgba(37,99,235,0.22);
+      transition: color .18s ease, box-shadow .18s ease;
+    }
+    .inline-link:hover {
+      color: var(--warm);
+      box-shadow: inset 0 -1px 0 rgba(249,115,22,0.4);
+    }
+
+    /* ============ HERO ============ */
+    .hero { padding: clamp(48px, 7vw, 88px) 0 clamp(20px, 3vw, 34px); }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: clamp(28px, 5vw, 64px);
+      align-items: center;
+    }
+
+    .hero-name {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(2.6rem, 6vw, 3.5rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin: 14px 0 0;
+    }
+    .hero-cn {
+      font-family: var(--display);
+      font-weight: 500;
+      /* sized to keep department + university on a single line */
+      font-size: clamp(0.72rem, 1.42vw, 0.95rem);
+      letter-spacing: 0.01em;
+      color: var(--faint);
+      margin: 10px 0 0;
+      white-space: nowrap;
+    }
+    .hero-cn b { color: var(--accent); font-weight: 600; }
+
+    .hero-rule {
+      width: 56px;
+      height: 3px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--warm));
+      margin: 22px 0 22px;
+    }
+
+    .hero p {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin: 0 0 16px;
+      max-width: 60ch;
+    }
+
+    /* notice + funfact cards */
+    .notice {
+      position: relative;
+      display: block;
+      background: linear-gradient(180deg, #FFF8F1, #FFFDFB);
+      border: 1px solid #F6DEC4;
+      border-left: 3px solid var(--warm);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin: 22px 0 16px;
+      max-width: 62ch;
+    }
+    .notice-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #B45309;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .notice-label::before {
+      content: "";
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--warm);
+      box-shadow: 0 0 0 3px rgba(249,115,22,0.18);
+    }
+    .notice p {
+      margin: 7px 0 0;
+      font-size: 0.94rem;
+      color: #6B4A28;
+    }
+
+    .funfact {
+      background: linear-gradient(180deg, #F2F7FF, #FBFDFF);
+      border: 1px solid #D6E2FB;
+      border-left: 3px solid var(--accent);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin: 0 0 6px;
+      max-width: 62ch;
+    }
+    .funfact-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--accent-2);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .funfact-label::before {
+      content: "";
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(29,78,216,0.15);
+    }
+    .funfact p {
+      margin: 7px 0 0;
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+
+    /* contact chips */
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 26px;
+    }
+    .chip {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 13px;
+      transition: border-color .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease;
+    }
+    .chip:hover {
+      color: var(--accent-2);
+      border-color: #C5D6FF;
+      box-shadow: 0 4px 14px rgba(37,99,235,0.1);
+      transform: translateY(-1px);
+    }
+
+    /* portrait */
+    .portrait { position: relative; width: min(320px, 78vw); margin: 0 auto; }
+    .portrait::after {
+      content: "";
+      position: absolute;
+      inset: 16px -16px -16px 16px;
+      border-radius: 20px;
+      background: linear-gradient(150deg, rgba(37,99,235,0.16), rgba(249,115,22,0.14));
+      z-index: 0;
+    }
+    .portrait img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.7);
+      box-shadow: 0 18px 44px -18px rgba(16,24,40,0.4);
+    }
+
+    /* ============ SECTIONS ============ */
+    .section { padding: clamp(18px, 2.6vw, 30px) 0; }
+
+    .sec-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    .sec-title {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(1.5rem, 3vw, 1.95rem);
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin: 6px 0 0;
+    }
+    /* standalone section intro — outside .sec-head so it is not squeezed by the flex row */
+    .sec-intro {
+      font-size: 0.94rem;
+      color: var(--muted);
+      margin: -12px 0 28px;
+      max-width: 76ch;
+    }
+    .sec-count {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.04em;
+      color: var(--faint);
+    }
+
+    /* tabs */
+    .pub-tabs {
+      display: inline-flex;
+      gap: 3px;
+      background: #EEF1F5;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px;
+    }
+    .pub-tab {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+      background: transparent;
+      border: none;
+      border-radius: 999px;
+      padding: 6px 16px;
+      cursor: pointer;
+      transition: all .18s ease;
+    }
+    .pub-tab:hover { color: var(--accent); }
+    .pub-tab.active {
+      color: var(--accent-2);
+      background: var(--surface);
+      box-shadow: 0 1px 3px rgba(16,24,40,0.1);
+    }
+
+    /* ============ PUBLICATIONS (no thumbnails) ============ */
+    .pub-list { display: flex; flex-direction: column; gap: 6px; }
+
+    .pub {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 18px 20px;
+      margin: 0 -20px;
+      border-radius: 14px;
+      border-bottom: 1px solid var(--line-soft);
+      transition: background-color .18s ease;
+    }
+    .pub:last-child { border-bottom: none; }
+    .pub:hover { background: rgba(29,78,216,0.035); }
+
+    .pub-num {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--wash);
+      border: 1px solid #D6E1FF;
+      border-radius: 8px;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .pub-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 9px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+    .tag-venue { color: var(--accent-2); background: var(--wash); border: 1px solid #D6E1FF; }
+    .tag-award { color: var(--amber-tx); background: var(--amber-bg); border: 1px solid #F0DCB4; }
+    .tag-oral  { color: var(--oral-tx);  background: var(--oral-bg);  border: 1px solid #D6D8FB; }
+    .tag-hot   { color: var(--hot-tx);   background: var(--hot-bg);   border: 1px solid #F6CFCA; }
+    .tag-prog  { color: var(--prog-tx);  background: var(--prog-bg);  border: 1px solid #C9E3D3; }
+
+    /* ---- shared 3-tier type system (publications + resume) ---- */
+    /* Tier 1 — title / institution */
+    .pub-title, .row-title {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1.0625rem;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin: 0 0 6px;
+    }
+    .row-title a { color: var(--accent); box-shadow: inset 0 -1px 0 rgba(29,78,216,0.22); }
+    .row-title a:hover { color: var(--warm); box-shadow: inset 0 -1px 0 rgba(234,88,12,0.4); }
+
+    /* Tier 2 — authors / degree · role */
+    .pub-authors, .row-role {
+      font-family: var(--body);
+      font-weight: 400;
+      font-size: 0.925rem;
+      line-height: 1.5;
+      color: var(--muted);
+      margin: 0 0 5px;
+    }
+    .pub-authors b { color: var(--accent-2); font-weight: 700; }
+
+    /* Tier 3 — venue · date */
+    .pub-venue, .row-date {
+      font-family: var(--body);
+      font-weight: 400;
+      font-size: 0.845rem;
+      line-height: 1.45;
+      color: var(--faint);
+      margin: 0;
+    }
+    .pub-venue em { font-style: italic; }
+
+    .pub-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 13px;
+    }
+    .reslink {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--accent);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 5px 11px;
+      transition: all .18s ease;
+    }
+    .reslink:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    /* "Request Paper" reveals the address in place — no mail client needed */
+    button.reslink {
+      font-family: var(--mono);
+      background: var(--surface);
+      cursor: pointer;
+      line-height: inherit;
+    }
+    button.reslink.revealed {
+      color: var(--accent-2);
+      background: var(--wash);
+      border-color: #D6E1FF;
+      cursor: text;
+      user-select: all;
+      transform: none;
+    }
+
+    /* ============ RESUME ROWS ============ */
+    .rows { display: flex; flex-direction: column; gap: 22px; }
+    .row { display: flex; gap: 18px; align-items: flex-start; }
+    .row-logo {
+      flex: none;
+      width: 80px; height: 80px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 7px;
+    }
+    .row-logo img { width: 100%; height: 100%; object-fit: contain; }
+    /* wordmark logos need a wider plate than square crests */
+    .row-logo--wide { width: 124px; }
+    .row-adv {
+      font-family: var(--body);
+      font-size: 0.845rem;
+      line-height: 1.45;
+      color: var(--muted);
+      margin: 6px 0 0;
+    }
+    .row-bullets {
+      margin: 9px 0 0;
+      padding-left: 18px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .row-bullets li { margin-bottom: 4px; }
+    .row-bullets b { color: var(--ink); font-weight: 600; }
+
+    /* ============ COMPACT LIST CARDS (awards / service) ============ */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(20px, 4vw, 40px);
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 22px 24px;
+    }
+    .card h3 {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1.02rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin: 0 0 14px;
+    }
+    .stack { list-style: none; margin: 0; padding: 0; }
+    .stack li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 14px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line-soft);
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+    .stack li:last-child { border-bottom: none; }
+    .stack .when {
+      flex: none;
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--faint);
+      white-space: nowrap;
+    }
+
+    /* ============ SKILLS ============ */
+    .skill-group { margin-bottom: 20px; }
+    .skill-group:last-child { margin-bottom: 0; }
+    .skill-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin: 0 0 10px;
+    }
+    .pills { display: flex; flex-wrap: wrap; gap: 7px; }
+    .pill {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 5px 11px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      margin-top: clamp(32px, 5vw, 56px);
+      padding: 24px 0 40px;
+    }
+    .foot-text {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--faint);
+      letter-spacing: 0.03em;
+      margin: 0;
+    }
+
+    .hidden { display: none !important; }
+
+    /* entrance */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .rise { animation: rise .7s cubic-bezier(.2,.7,.2,1) both; }
+    .rise-2 { animation-delay: .08s; }
+    .rise-3 { animation-delay: .16s; }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 860px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 34px; }
+      .hero-text { order: 2; text-align: left; }
+      .portrait-col { order: 1; }
+      .portrait { width: min(260px, 70vw); }
+      .portrait::after { inset: 12px -12px -12px 12px; }
+      .split { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      .wrap { padding: 0 20px; }
+      .links { gap: 7px; }
+      .chip { padding: 7px 11px; font-size: 0.75rem; }
+      .pub { grid-template-columns: 1fr; gap: 12px; }
+      .row-logo { width: 60px; height: 60px; }
+      .row-logo--wide { width: 92px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-text rise">
+          <span class="eyebrow">Ph.D. Candidate · Behavioral Cybersecurity &amp; agentic AI</span>
+          <h1 class="hero-name">Yuhui Zhang</h1>
+          <p class="hero-cn">Department of Management Science &amp; Systems · <b>University at Buffalo</b></p>
+          <div class="hero-rule"></div>
+
+          <p>
+            Hi there! I am a Ph.D. candidate and Graduate Assistant in the Department of Management Science and Systems at the <a href="https://management.buffalo.edu/" class="inline-link">University at Buffalo</a>, where I expect to complete my Ph.D. in 2027. Before Buffalo, I received my M.S. and B.S. from the East China University of Science and Technology in Shanghai.
+          </p>
+          <p>
+            My research centers on behavioral cybersecurity, human–AI interaction, agentic AI, information search and consumption, online communities, and AI-enabled analytics. I investigate these topics using behavioral experiments, survey research, statistical modeling, and computational analytics.
+          </p>
+
+          <div class="notice">
+            <span class="notice-label">Open to opportunities</span>
+            <p>I expect to complete my Ph.D. in 2027 and am happy to connect about research collaborations and upcoming positions. Feel free to reach out by email — my full CV is linked below.</p>
+          </div>
+
+          <nav class="links" aria-label="Profile links">
+            <a href="documents/CV.pdf" class="chip">CV</a>
+            <a href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=9FPruDQAAAAJ" class="chip">Google Scholar</a>
+            <a href="mailto:zhang428@buffalo.edu" class="chip">zhang428@buffalo.edu</a>
+          </nav>
+        </div>
+
+        <div class="portrait-col rise rise-2">
+          <div class="portrait">
+            <img src="images/profile.jpg" alt="Yuhui Zhang" onerror="this.onerror=null; this.src='https://placehold.co/320x320/e2e8f0/64748b?text=Yuhui+Zhang';">
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ PUBLICATIONS ============ -->
+    <section class="section" id="research">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <h2 class="sec-title">Research</h2>
+            <p class="sec-count" id="pub-count"></p>
+          </div>
+          <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+            <div class="pub-tabs">
+              <button class="pub-tab active" data-category="all">All</button>
+              <button class="pub-tab" data-category="journal">Journal</button>
+              <button class="pub-tab" data-category="progress">Working Papers</button>
+              <button class="pub-tab" data-category="conference">Conference</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-list" id="publications-container">
+
+          <!-- ---- Journal publications ---- -->
+          <article class="pub" data-categories="journal">
+            <div class="pub-num">01</div>
+            <div class="pub-body">
+              <div class="pub-meta">
+                <span class="tag tag-venue">Technology in Society 2026</span>
+                <span class="tag tag-award">Impact Factor 12.5</span>
+                <span class="tag tag-hot">📰 The Buffalo News</span>
+              </div>
+              <h3 class="pub-title">To hack or not to hack, that is the question: Ethical orientation in hacking</h3>
+              <p class="pub-authors"><b>Zhang, Y.</b>, Amo, L., Border, C., Cichocki, D., Gaia, J., Murray, D., … &amp; Upadhyaya, S.</p>
+              <p class="pub-venue"><em>Technology in Society</em>, 103388, 2026</p>
+              <div class="pub-links">
+                <a href="https://doi.org/10.1016/j.techsoc.2026.103388" class="reslink">Paper</a>
+                <a href="https://www.buffalo.edu/ubnow/stories/2026/06/sanders-hacking.html" class="reslink">Press</a>
+                <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=9FPruDQAAAAJ&amp;citation_for_view=9FPruDQAAAAJ:zYLM7Y9cAGgC" class="reslink">Scholar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ---- Works in progress ---- -->
+          <article class="pub" data-categories="progress">
+            <div class="pub-num">02</div>
+            <div class="pub-body">
+              <div class="pub-meta">
+                <span class="tag tag-prog">Working Paper</span>
+                <span class="tag tag-oral">DRW 2026</span>
+              </div>
+              <h3 class="pub-title">“The AI Made Me Do It”: How AI Affects Hacking Interest and Perceived Capability among Non-Technical Users</h3>
+              <p class="pub-authors"><b>Zhang, Y.</b> &amp; Amo, L. C.</p>
+              <p class="pub-venue">Target: <em>MIS Quarterly</em> · Accepted for presentation at the 2026 Dewald Roode Information Security Research Workshop</p>
+              <div class="pub-links">
+                <button type="button" class="reslink reveal-email">Request Paper</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="pub" data-categories="progress">
+            <div class="pub-num">03</div>
+            <div class="pub-body">
+              <div class="pub-meta">
+                <span class="tag tag-prog">Working Paper</span>
+                <span class="tag tag-oral">INFORMS 2026</span>
+              </div>
+              <h3 class="pub-title">Information Search in Community-based Forums: How Do Consensus Cues Impact Information Adoption</h3>
+              <p class="pub-authors">Hunt, K., Amo, L. C., <b>Zhang, Y.</b>, &amp; Smith, S. D.</p>
+              <p class="pub-venue">Target: <em>MIS Quarterly</em> · Accepted for presentation at the 2026 INFORMS Annual Meeting, San Francisco, CA</p>
+              <div class="pub-links">
+                <button type="button" class="reslink reveal-email">Request Paper</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="pub" data-categories="progress">
+            <div class="pub-num">04</div>
+            <div class="pub-body">
+              <div class="pub-meta"><span class="tag tag-prog">Working Paper</span></div>
+              <h3 class="pub-title">Theme-Aware Risk Modeling with a Projection-Based EM Algorithm</h3>
+              <p class="pub-authors"><b>Zhang, Y.</b> &amp; Song, L.</p>
+              <p class="pub-venue">Target: <em>Management Science</em></p>
+            </div>
+          </article>
+
+          <article class="pub" data-categories="progress">
+            <div class="pub-num">05</div>
+            <div class="pub-body">
+              <div class="pub-meta"><span class="tag tag-prog">Working Paper</span></div>
+              <h3 class="pub-title">More Than One Shot: The Value of Iterative Processing in Large Language Models</h3>
+              <p class="pub-authors"><b>Zhang, Y.</b></p>
+              <p class="pub-venue">Manuscript in preparation</p>
+            </div>
+          </article>
+
+          <article class="pub" data-categories="progress">
+            <div class="pub-num">06</div>
+            <div class="pub-body">
+              <div class="pub-meta">
+                <span class="tag tag-prog">Working Paper</span>
+                <span class="tag tag-oral">DSI 2026</span>
+              </div>
+              <h3 class="pub-title">Enhancing Ethical Reasoning in Large Language Models with Deontological, Idealist, and Relativist Memory Profiles</h3>
+              <p class="pub-authors">Sanders, S., Sanders, G. L., Sellitto, D., &amp; <b>Zhang, Y.</b></p>
+              <p class="pub-venue">Target: <em>IEEE Access</em> · Abstract accepted for presentation at DSI 2026</p>
+              <div class="pub-links">
+                <button type="button" class="reslink reveal-email">Request Paper</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- ---- Conference oral presentations ---- -->
+          <article class="pub" data-categories="conference">
+            <div class="pub-num">07</div>
+            <div class="pub-body">
+              <div class="pub-meta"><span class="tag tag-venue">DSI 2026</span><span class="tag tag-oral">Oral</span></div>
+              <h3 class="pub-title">Crypto Over-hyped: Analyzing the Gap Between the Promised Land and Reality</h3>
+              <p class="pub-authors">Sanders, S., <b>Zhang, Y.</b>, Shi, J., &amp; Sanders, G. L.</p>
+              <p class="pub-venue">Accepted for presentation at DSI 2026</p>
+              <div class="pub-links">
+                <button type="button" class="reslink reveal-email">Request Paper</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="pub" data-categories="conference">
+            <div class="pub-num">08</div>
+            <div class="pub-body">
+              <div class="pub-meta"><span class="tag tag-venue">AMCIS 2025</span><span class="tag tag-oral">Oral</span></div>
+              <h3 class="pub-title">The Academic as an Entrepreneur: Real Options and Co-authoring in IS Scholarship</h3>
+              <p class="pub-authors"><b>Zhang, Y.</b>, Abdelhamid, M., Smith, S. D., &amp; Sanders, G. L.</p>
+              <p class="pub-venue"><em>AMCIS 2025 Proceedings</em>, 4, 2025</p>
+              <div class="pub-links">
+                <a href="https://aisel.aisnet.org/amcis2025/intelfuture/intelfuture/4/" class="reslink">Paper</a>
+                <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=9FPruDQAAAAJ&amp;citation_for_view=9FPruDQAAAAJ:UeHWp8X0CEIC" class="reslink">Scholar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pub" data-categories="conference">
+            <div class="pub-num">09</div>
+            <div class="pub-body">
+              <div class="pub-meta"><span class="tag tag-venue">DSI 2025</span><span class="tag tag-oral">Oral</span></div>
+              <h3 class="pub-title">Calm, Focused, and Potentially Dangerous: Unpacking the Role of Mindfulness in Cyber</h3>
+              <p class="pub-authors"><b>Zhang, Y.</b>, Amo, L. C., Cichocki, D., Gaia, J., Murray, D., Sanders, S., Upadhyaya, S., &amp; Sanders, G. L.</p>
+              <p class="pub-venue">Decision Sciences Institute (DSI), 2025</p>
+              <div class="pub-links">
+                <a href="https://par.nsf.gov/biblio/10693716" class="reslink">Paper</a>
+                <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=9FPruDQAAAAJ&amp;citation_for_view=9FPruDQAAAAJ:IjCSPb-OGe4C" class="reslink">Scholar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pub" data-categories="conference">
+            <div class="pub-num">10</div>
+            <div class="pub-body">
+              <div class="pub-meta"><span class="tag tag-venue">DRW 2025</span><span class="tag tag-oral">Oral</span></div>
+              <h3 class="pub-title">Technology restriction and computer abuse behavior: Exploring the roles of technology policy injustice and incivility</h3>
+              <p class="pub-authors">Amo, L. C. &amp; <b>Zhang, Y.</b></p>
+              <p class="pub-venue">2025 Dewald Roode Information Security Research Workshop (DRW)</p>
+              <div class="pub-links">
+                <button type="button" class="reslink reveal-email">Request Paper</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="pub" data-categories="conference">
+            <div class="pub-num">11</div>
+            <div class="pub-body">
+              <div class="pub-meta"><span class="tag tag-venue">ICIS 2023</span><span class="tag tag-oral">Oral</span></div>
+              <h3 class="pub-title">Effects of Personalized Nudging in eLearning Environments</h3>
+              <p class="pub-authors"><b>Zhang, Y.</b>, Amo, L. C., &amp; Cichocki, D.</p>
+              <p class="pub-venue"><em>ICIS 2023 Proceedings</em>, 2, 2023</p>
+              <div class="pub-links">
+                <a href="https://aisel.aisnet.org/icis2023/learnandiscurricula/learnandiscurricula/2/" class="reslink">Paper</a>
+                <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=9FPruDQAAAAJ&amp;citation_for_view=9FPruDQAAAAJ:qjMakFHDy7sC" class="reslink">Scholar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pub" data-categories="conference">
+            <div class="pub-num">12</div>
+            <div class="pub-body">
+              <div class="pub-meta"><span class="tag tag-venue">HCI International 2019</span></div>
+              <h3 class="pub-title">Study on the Effect of App Reverse Cycle Propagation Under Multi-screen Propagation</h3>
+              <p class="pub-authors"><b>Zhang, Y.</b>, Jiang, Z., &amp; Fu, R.</p>
+              <p class="pub-venue"><em>HCI International 2019, Communications in Computer and Information Science</em>, 1034, 161–168</p>
+              <div class="pub-links">
+                <a href="https://doi.org/10.1007/978-3-030-23525-3_21" class="reslink">Paper</a>
+                <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=9FPruDQAAAAJ&amp;citation_for_view=9FPruDQAAAAJ:Tyk-4Ss8FVUC" class="reslink">Scholar</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EDUCATION ============ -->
+    <section class="section" id="education">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <h2 class="sec-title">Education</h2>
+          </div>
+        </div>
+        <div class="rows">
+          <div class="row">
+            <div class="row-logo">
+              <img src="images/ub_logo.svg" alt="University at Buffalo logo" onerror="this.onerror=null; this.src='https://placehold.co/64x64/e2e8f0/64748b?text=UB';">
+            </div>
+            <div>
+              <h3 class="row-title">University at Buffalo, NY, USA</h3>
+              <p class="row-role">Ph.D. in Management Science and Systems</p>
+              <p class="row-date">2022 – 2027 (Expected) · GPA 3.8 / 4.00</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="row-logo">
+              <img src="images/ecust_logo.png" alt="ECUST Logo" onerror="this.onerror=null; this.src='https://placehold.co/64x64/e2e8f0/64748b?text=ECUST';">
+            </div>
+            <div>
+              <h3 class="row-title">East China University of Science and Technology, Shanghai, China</h3>
+              <p class="row-role">M.S. in Commercial and Advertising Art</p>
+              <p class="row-date">2018 – 2021 · GPA 3.6 / 4.00 · Ranked 2nd</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="row-logo">
+              <img src="images/ecust_logo.png" alt="ECUST Logo" onerror="this.onerror=null; this.src='https://placehold.co/64x64/e2e8f0/64748b?text=ECUST';">
+            </div>
+            <div>
+              <h3 class="row-title">East China University of Science and Technology, Shanghai, China</h3>
+              <p class="row-role">B.S. in Advertising</p>
+              <p class="row-date">2014 – 2018 · GPA 3.7 / 4.00 · Ranked 2nd</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TEACHING ============ -->
+    <section class="section" id="teaching">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <h2 class="sec-title">Teaching Experience</h2>
+          </div>
+        </div>
+        <p class="sec-intro">My teaching interests include business statistics and analytics, cybersecurity, database management, systems design and analysis, decision modeling, and AI for business. I emphasize both conceptual foundations and hands-on applications that help students use data and technology to solve real-world business problems.</p>
+        <div class="rows">
+          <div class="row">
+            <div class="row-logo">
+              <img src="images/ub_logo.svg" alt="University at Buffalo logo" onerror="this.onerror=null; this.src='https://placehold.co/64x64/e2e8f0/64748b?text=UB';">
+            </div>
+            <div>
+              <h3 class="row-title">MGQ 201: Introduction to Statistics for Analytics — University at Buffalo</h3>
+              <p class="row-role">Instructor of Record</p>
+              <p class="row-date">Summer 2026 · Teaching Evaluation 4.5 / 5.0</p>
+              <ul class="row-bullets">
+                <li>Served as Instructor of Record for MGQ 201, independently delivering lectures, recitations, and assignments for an accelerated summer business statistics course.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TEACHING ASSISTANT EXPERIENCE ============ -->
+    <section class="section" id="ta">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <h2 class="sec-title">Teaching Assistant Experience</h2>
+          </div>
+        </div>
+        <div class="rows">
+          <div class="row">
+            <div class="row-logo">
+              <img src="images/ecust_logo.png" alt="ECUST logo" onerror="this.onerror=null; this.src='https://placehold.co/64x64/e2e8f0/64748b?text=ECUST';">
+            </div>
+            <div>
+              <h3 class="row-title">Communication — ECUST</h3>
+              <p class="row-role">Teaching Assistant · <em>Outstanding Teaching Assistant</em></p>
+              <p class="row-date">Mar. 2020 – Jul. 2020</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="row-logo">
+              <img src="images/ecust_logo.png" alt="ECUST logo" onerror="this.onerror=null; this.src='https://placehold.co/64x64/e2e8f0/64748b?text=ECUST';">
+            </div>
+            <div>
+              <h3 class="row-title">Web Design — ECUST</h3>
+              <p class="row-role">Teaching Assistant</p>
+              <p class="row-date">Sept. 2019 – Feb. 2020</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="row-logo">
+              <img src="images/ecust_logo.png" alt="ECUST logo" onerror="this.onerror=null; this.src='https://placehold.co/64x64/e2e8f0/64748b?text=ECUST';">
+            </div>
+            <div>
+              <h3 class="row-title">Computer Vision Design — ECUST</h3>
+              <p class="row-role">Teaching Assistant</p>
+              <p class="row-date">Sept. 2018 – Feb. 2019</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INDUSTRY EXPERIENCE ============ -->
+    <section class="section" id="experience">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <h2 class="sec-title">Industry Experience</h2>
+          </div>
+        </div>
+        <p class="sec-intro">Three years as a product manager at NASDAQ- and NYSE-listed technology firms. This work maps onto the IS curriculum — systems design and analysis, database management, business statistics, and decision modeling — and I teach it as worked business cases.</p>
+        <div class="rows">
+          <div class="row">
+            <div class="row-logo row-logo--wide">
+              <img src="images/hworld_logo.svg" alt="H World Group logo" onerror="this.onerror=null; this.src='https://placehold.co/124x64/e2e8f0/64748b?text=H+World';">
+            </div>
+            <div>
+              <h3 class="row-title">H World Group (NASDAQ: HTHT) — Data Analytics Team, Shanghai, China</h3>
+              <p class="row-role">Product Manager</p>
+              <p class="row-date">Jul. 2021 – Apr. 2022</p>
+              <ul class="row-bullets">
+                <li><b>Systems design &amp; analysis.</b> Specified a self-service customer segmentation platform; audience definition fell from two weeks to real time.</li>
+                <li><b>Database management.</b> Extended the customer attribute schema to absorb 50+ new tags per month across business units.</li>
+                <li><b>Business intelligence.</b> Owned KPI dashboards serving 20,000+ hotel staff.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="row-logo row-logo--wide">
+              <img src="images/jd_logo.png" alt="JD.com logo" onerror="this.onerror=null; this.src='https://placehold.co/124x64/e2e8f0/64748b?text=JD.com';">
+            </div>
+            <div>
+              <h3 class="row-title">JD.com — Membership Product Team, Shanghai, China</h3>
+              <p class="row-role">Product Manager Intern</p>
+              <p class="row-date">Jul. 2020 – Apr. 2021</p>
+              <ul class="row-bullets">
+                <li><b>Funnel analysis.</b> Modeled the JD PLUS membership funnel; the recommendation-driven entry point I specified drove 70% of new members at 1.5% conversion.</li>
+                <li><b>Design of experiments.</b> Personalized retention experiments raised core membership retention by 30%.</li>
+                <li><b>Decision support.</b> Delivered self-service membership analytics to 200+ stakeholders.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="row-logo row-logo--wide">
+              <img src="images/alibaba_logo.svg" alt="Alibaba Group logo" onerror="this.onerror=null; this.src='https://placehold.co/124x64/e2e8f0/64748b?text=Alibaba';">
+            </div>
+            <div>
+              <h3 class="row-title">Alibaba — Commercial Rental Team, Shanghai, China</h3>
+              <p class="row-role">Product Manager Intern</p>
+              <p class="row-date">Mar. 2019 – Dec. 2019</p>
+              <ul class="row-bullets">
+                <li><b>Lifecycle analytics.</b> Built cohort dashboards tracking exposure, activation, conversion, and retention for Hello TransTech's carpooling cold-start.</li>
+                <li><b>Resource allocation.</b> Reallocated spend across 50+ traffic partners by measured channel quality.</li>
+                <li><b>Outcome.</b> Grew traffic exposure 300% at 15% conversion.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ AWARDS + SERVICE ============ -->
+    <section class="section" id="awards">
+      <div class="wrap">
+        <div class="split">
+          <div class="card">
+            <h3>Awards &amp; Honors</h3>
+            <ul class="stack">
+              <li><span>Presidential Scholarship, University at Buffalo</span><span class="when">2022–2026</span></li>
+              <li><span>First-Class Academic Scholarship, ECUST</span><span class="when">2015, 2017, 2018, 2020</span></li>
+              <li><span>Second-Class Academic Scholarship, ECUST</span><span class="when">2016, 2019, 2021</span></li>
+              <li><span>Outstanding Teaching Assistant, ECUST</span><span class="when">2020</span></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Professional Service</h3>
+            <ul class="stack">
+              <li><span>Ad Hoc Conference Reviewer, AMCIS</span><span class="when">2023–2026</span></li>
+              <li><span>Ad Hoc Workshop Reviewer, HICSS</span><span class="when">2024, 2026</span></li>
+              <li><span>Ad Hoc Conference Reviewer, ECIS</span><span class="when">2025</span></li>
+              <li><span>Ad Hoc Conference Reviewer, ICIS</span><span class="when">2023</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section" id="skills">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <h2 class="sec-title">Skills</h2>
+          </div>
+        </div>
+        <div class="card">
+          <div class="skill-group">
+            <p class="skill-label">Analytics &amp; Tools</p>
+            <div class="pills">
+              <span class="pill">Prompt Engineering</span>
+              <span class="pill">Retrieval-Augmented Generation</span>
+              <span class="pill">SQL</span>
+              <span class="pill">Python</span>
+              <span class="pill">HTML</span>
+              <span class="pill">SPSS</span>
+              <span class="pill">Qualtrics</span>
+              <span class="pill">Excel</span>
+              <span class="pill">Tableau / Power BI</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <p class="skill-label">Cybersecurity Tools</p>
+            <div class="pills">
+              <span class="pill">RSA Archer</span>
+              <span class="pill">Kali Linux Suite</span>
+              <span class="pill">Nmap</span>
+              <span class="pill">Wireshark</span>
+              <span class="pill">Burp Suite</span>
+              <span class="pill">Metasploit</span>
+              <span class="pill">OWASP ZAP</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <p class="skill-label">Product Management</p>
+            <div class="pills">
+              <span class="pill">Aha!</span>
+              <span class="pill">Jira</span>
+              <span class="pill">Smartsheet</span>
+              <span class="pill">Figma</span>
+              <span class="pill">Product Strategy</span>
+              <span class="pill">User Growth</span>
+              <span class="pill">Customer Segmentation</span>
+              <span class="pill">Funnel Analysis</span>
+              <span class="pill">Dashboard Design</span>
+              <span class="pill">A/B Testing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p class="foot-text">Yuhui Zhang · Department of Management Science &amp; Systems, University at Buffalo · zhang428@buffalo.edu</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const tabs = document.querySelectorAll('.pub-tab');
+      const articles = document.querySelectorAll('.pub');
+      const countEl = document.getElementById('pub-count');
+
+      function updateCount() {
+        const visible = Array.from(articles).filter(a => !a.classList.contains('hidden')).length;
+        if (countEl) countEl.textContent = visible + ' / ' + articles.length + ' items';
+      }
+
+      function filterArticles(category) {
+        articles.forEach(article => {
+          const categories = (article.getAttribute('data-categories') || '').split(' ').filter(Boolean);
+          if (category === 'all' || categories.includes(category)) {
+            article.classList.remove('hidden');
+          } else {
+            article.classList.add('hidden');
+          }
+        });
+        updateCount();
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function () {
+          tabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          filterArticles(this.getAttribute('data-category'));
+        });
+      });
+
+      filterArticles('all');
+
+      // "Request Paper" swaps the label for the contact address in place, and copies
+      // it to the clipboard. A mailto: link is useless to visitors with no mail client.
+      const EMAIL = 'zhang428@buffalo.edu';
+      document.querySelectorAll('.reveal-email').forEach(btn => {
+        btn.addEventListener('click', function () {
+          if (this.classList.contains('revealed')) return;
+          this.textContent = EMAIL;
+          this.classList.add('revealed');
+          this.setAttribute('title', 'Email me for a copy of this paper');
+          if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(EMAIL).catch(() => {});
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
