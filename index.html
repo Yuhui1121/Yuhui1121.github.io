@@ -224,6 +224,17 @@
       box-shadow: 0 4px 14px rgba(37,99,235,0.1);
       transform: translateY(-1px);
     }
+    /* the Email chip is a button: it reveals the address on click */
+    button.chip { line-height: 1.65; cursor: pointer; }
+    button.chip.revealed {
+      color: var(--accent-2);
+      background: var(--wash);
+      border-color: #D6E1FF;
+      box-shadow: none;
+      cursor: text;
+      user-select: all;
+      transform: none;
+    }
 
     /* portrait */
     .portrait { position: relative; width: min(320px, 78vw); margin: 0 auto; }
@@ -617,7 +628,7 @@
           <nav class="links" aria-label="Profile links">
             <a href="cv.html" class="chip">CV</a>
             <a href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=9FPruDQAAAAJ" class="chip">Google Scholar</a>
-            <a href="mailto:zhang428@buffalo.edu" class="chip">zhang428@buffalo.edu</a>
+            <button type="button" class="chip reveal-email">Email</button>
           </nav>
         </div>
 
